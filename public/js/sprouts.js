@@ -5,7 +5,7 @@
   // update the page number for the next request
 
 var pageNumber = 2
-$(".more-sprouts").on("click", function(event) {
+$(".more-sprouts").scroll("click", function(event) {
   event.preventDefault();
 
   $.ajax({
