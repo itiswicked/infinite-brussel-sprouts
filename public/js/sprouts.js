@@ -1,15 +1,13 @@
-// when click more more tweets link
-  // inhibit the default behaviour
-  // make an asynchronous request to the server with a specified page number
-  // append the list of tweets with the response data
-  // update the page number for the next request
 
-var pageNumber = 2
-
+// For forcing the scroll back to the top upon refresh
 $(document).ready(function(){
-    $(this).scrollTop(0);
+  $("body").scrollTop(0);
 });
 
+// Counter for pagination
+var pageNumber = 2
+
+// Paginating upon scroll
 $(window).scroll(function(event) {
   if($(window).scrollTop() + $(window).height() === $(document).height()) {
     $.ajax({
