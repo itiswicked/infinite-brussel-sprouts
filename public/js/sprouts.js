@@ -5,23 +5,28 @@
   // update the page number for the next request
 
 var pageNumber = 2
-$(".more-sprouts").scroll("click", function(event) {
-  event.preventDefault();
 
-  $.ajax({
-    method: "GET",
-    url: "/tweets.json",
-    data: { page: pageNumber }
-  }).done(function(data) {
-    pageNumber++;
-    for(i = 0; data.length; i++) {
-      $(".tweets").append(
-        "<li class='tweet'>" +
-          "<div class='body'>" + data[i].text + "</div>" +
-          "<div class='user'>" + data[i].username + "</div>" +
-        "</li>"
-      );
-    }
-  });
+$(document).ready(function(){
+    $(this).scrollTop(0);
+});
+
+$(window).scroll(function(event) {
+  if($(window).scrollTop() + $(window).height() === $(document).height()) {
+    $.ajax({
+      method: "GET",
+      url: "/tweets.json",
+      data: { page: pageNumber }
+    }).done(function(data) {
+      pageNumber++;
+      for(i = 0; i < data.length; i++) {
+        $(".tweets").append(
+          "<li class='tweet'>" +
+            "<div class='body'>" + data[i].text + "</div>" +
+            "<div class='user'>" + data[i].username + "</div>" +
+          "</li>"
+        );
+      }
+    });
+  }
   return false;
 });
